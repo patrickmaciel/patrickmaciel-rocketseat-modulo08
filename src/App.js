@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 import GlobalStyle from './styles/global';
 
@@ -6,10 +6,11 @@ function App() {
   const [tech, setTech] = useState(['React.js', 'React Native']);
   const [newTech, setNewTech] = useState('');
 
-  function handleAdd() {
+  // useCallback somente em funções que manipulam o estado
+  const handleAdd = useCallback(() => {
     setTech([...tech, newTech]);
     setNewTech('');
-  }
+  }, [tech, newTech]);
 
   useEffect(() => {
     const storageTech = localStorage.getItem('tech');
