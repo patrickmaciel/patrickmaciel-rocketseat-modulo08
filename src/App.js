@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import GlobalStyle from './styles/global';
 
@@ -29,6 +29,8 @@ function App() {
     localStorage.setItem('tech', JSON.stringify(tech));
   }, [tech]); // o state que você for usar deve estar nesse array
 
+  const techSize = useMemo(() => tech.length, [tech]);
+
   return (
     <>
       <GlobalStyle />
@@ -37,6 +39,8 @@ function App() {
           <li key={t}>{t}</li>
         ))}
       </ul>
+      <strong>Você tem {techSize} tecnologias</strong>
+      <br />
 
       <input value={newTech} onChange={e => setNewTech(e.target.value)} />
       <button type="button" onClick={handleAdd}>
